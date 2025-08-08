@@ -1,0 +1,122 @@
+# .github/workflows/deploy-to-app-hosting.yml
+
+# Name of the workflow, which will be displayed in the GitHub Actions UI.
+name: Build and Deploy to Cloud Run (PROD)
+
+# Controls when the workflow will run.
+on:
+
+  # Allows you to run this workflow manually from the Actions tab or to be called from another workflow.
+  workflow_dispatch:
+    # Defines input parameters for manual runs.
+    inputs:
+      version:
+        description: 'The version tag to build and deploy (e.g., v1.2.3)'
+        required: true
+        type: string
+
+# Environment variables available to all jobs in this workflow.
+env:
+  # The name of your Cloud Run service.
+  SERVICE_NAME: ${{ vars.SERVICE_NAME }} # <-- TODO: Change this to your service name
+
+jobs:
+  deploy:
+    # Specifies that this job runs in the "PROD" environment.
+    # You can configure protection rules and environment-specific secrets for "PROD"
+    # in your repository settings under Settings > Environments.
+    environment: PROD
+
+    env:
+      # Your Google Cloud Project ID.
+      PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+      # The Google Cloud region where your service is deployed.
+      REGION: ${{ vars.REGION }}
+      # The JSON key of the Google Cloud service account.
+      GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
+
+
+    # The type of runner that the job will run on.
+    runs-on: ubuntu-latest
+
+    # Granting permissions for the Google Auth action to work correctly.
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+
+
+      # Step 1: Setup di Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # Step 2: Determine the version string.
+      # This step uses the version provided in the manual input.
+      # It checks if the tag exists in the remote repository.
+      - name: Determine Version
+        id: get_version
+        run: |
+          # Use the version provided in the manual input.
+          VERSION="${{ github.event.inputs.version }}"
+          echo "Using provided version: $VERSION"
+          if git ls-remote --tags ${{github.repositoryUrl}} | grep "refs/tags/$VERSION"; then
+            # Set the determined version as an environment variable for subsequent steps.
+            echo "deploy_version=${VERSION#v}" >> $GITHUB_OUTPUT
+            echo "deploy_id=${COMMIT_ID}" >> $GITHUB_OUTPUT
+          else
+            echo "Tag '$VERSION' not found on repository."
+            exit 1
+          fi
+        
+
+
+      # Step 3: Check out the repository's code.
+      - name: Checkout repository
+        id: checkout
+        uses: actions/checkout@v4
+        with:
+          # `ref: ` is required to fetch the latest tag.
+          ref: "v${{ steps.get_version.outputs.deploy_version }}"
+          # `fetch-depth: 0` is required to fetch all history and tags.
+          fetch-depth: 0
+
+      # Step 4: Authenticate to Google Cloud.
+      # This action uses Workload Identity Federation to securely authenticate.
+      - name: Authenticate to Google Cloud
+        id: auth
+        uses: 'google-github-actions/auth@v2'
+        with:
+          # The JSON key of the Google Cloud service account.
+          credentials_json: ${{ env.GCP_SA_KEY }}
+          # The project_id on Google Cloud.
+          project_id: ${{ env.PROJECT_ID }}
+
+
+      # Step 5: Install dependencies
+      # This step installs the project's dependencies using npm.
+      # `npm ci` is used for clean installs based on the package-lock.json file.
+      - name: Install dependencies
+        id: install_dependencies
+        run: npm ci
+
+      # Step 6: Build the Angular SSR application
+      # This step verifies that the application compiles correctly after all checks.
+      - name: Build Angular App
+        run: npm run build
+
+      # 6. Deploy sul canale 'live' di App Hosting
+      # Quando l'azione viene eseguita su un push a 'main', il deploy
+      # avviene automaticamente sul canale live.
+      - name: Deploy to App Hosting live channel
+        uses: 'w9jds/firebase-action@master'
+        with:
+          args: apphosting:rollouts:create ${{ env.SERVICE_NAME }} --git_commit ${{ steps.get_version.outputs.deploy_id }}
+          appId: TUO_APP_ID # <-- SOSTITUISCI con il tuo App ID di App Hosting
+
+      # Step 9: Output the URL of the deployed service.
+      - name: Show Deployed URL
+        run: echo "Successfully deployed to ${{ steps.deploy.outputs.url }}"
+

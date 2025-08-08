@@ -1,0 +1,116 @@
+name: Release
+
+on:
+  push:
+    branches: [main, master]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    outputs:
+      new_tag: ${{steps.generate-tag.outputs.new_tag}}
+    steps:
+    - id: checkout
+      name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0  # Fetch all history for proper tag detection
+    
+    - id: setup
+      name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    
+    - id: generate-tag
+      name: Get latest tag and determine version bump
+      run: |
+        # Get the latest tag in the current branch history
+        LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+        echo "Latest tag: $LATEST_TAG"
+        
+        # Extract version numbers (remove 'v' prefix if present)
+        VERSION=${LATEST_TAG#v}
+        IFS='.' read -r -a VERSION_PARTS <<< "$VERSION"
+        MAJOR=${VERSION_PARTS[0]:-0}
+        MINOR=${VERSION_PARTS[1]:-0}
+        PATCH=${VERSION_PARTS[2]:-0}
+        
+        echo "Current version: $MAJOR.$MINOR.$PATCH"
+        
+        # Get the latest commit message
+        COMMIT_MSG=$(git log -1 --pretty=%B)
+        echo "Commit message: $COMMIT_MSG"
+        
+        # Determine version bump based on commit message
+        if [[ $COMMIT_MSG =~ ^MAJOR ]]; then
+          NEW_MAJOR=$((MAJOR + 1))
+          NEW_MINOR=0
+          NEW_PATCH=0
+          echo "MAJOR version bump detected"
+        elif [[ $COMMIT_MSG =~ ^RELEASE ]]; then
+          NEW_MAJOR=$MAJOR
+          NEW_MINOR=$((MINOR + 1))
+          NEW_PATCH=0
+          echo "MINOR version bump detected"
+        elif [[ $COMMIT_MSG =~ ^FIX ]]; then
+          NEW_MAJOR=$MAJOR
+          NEW_MINOR=$MINOR
+          NEW_PATCH=$((PATCH + 1))
+          echo "PATCH version bump detected"
+        else
+          NEW_MAJOR=$MAJOR
+          NEW_MINOR=$MINOR
+          NEW_PATCH=$((PATCH + 1))
+          echo "Default PATCH version bump"
+        fi
+        
+        NEW_VERSION="$NEW_MAJOR.$NEW_MINOR.$NEW_PATCH"
+        NEW_TAG="v$NEW_VERSION"
+        
+        echo "New version: $NEW_VERSION"
+        echo "New tag: $NEW_TAG"
+        
+        # Set outputs
+        echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
+        echo "new_tag=$NEW_TAG" >> $GITHUB_OUTPUT
+        echo "latest_tag=$LATEST_TAG" >> $GITHUB_OUTPUT
+    
+    - id: push-tag
+      name: Create and push tag
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        
+        echo "Creating tag: ${{ steps.generate-tag.outputs.new_tag }}"
+        git tag -a "${{ steps.generate-tag.outputs.new_tag }}" -m "Release ${{ steps.generate-tag.outputs.new_version }}"
+        git push origin "${{ steps.generate-tag.outputs.new_tag }}"
+        
+        echo "✅ Tag ${{ steps.generate-tag.outputs.new_tag }} created and pushed"
+    
+    - name: Create GitHub Release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ steps.generate-tag.outputs.new_tag }}
+        release_name: Release ${{ steps.generate-tag.outputs.new_version }}
+        body: |
+          ## Changes in ${{ steps.generate-tag.outputs.new_version }}
+          
+          This release was automatically generated based on the commit message.
+          
+          **Previous version:** ${{ steps.generate-tag.outputs.latest_tag }}
+          **New version:** ${{ steps.generate-tag.outputs.new_tag }}
+          
+          ### Commit Messages Since Last Release
+          
+          $(git log ${{ steps.generate-tag.outputs.latest_tag }}..HEAD --pretty=format:"- %s" --no-merges)
+        draft: false
+        prerelease: false
+
+    - name: Trigger Workflow B
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        gh workflow run "Build and Deploy to Cloud Run (PROD)" --ref main -f version=${{ steps.generate-tag.outputs.new_tag }}
