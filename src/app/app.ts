@@ -9,5 +9,5 @@ import {FooterComponent} from './components/footer/footer.component';
   templateUrl: './app.html'
 })
 export class App {
-  protected readonly title = signal('devfestSite-FE');
+  protected readonly title = signal('meerkat-fe');
 }

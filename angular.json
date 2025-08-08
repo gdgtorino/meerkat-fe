@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "devfestSite-FE": {
+    "meerkat-fe": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -61,10 +61,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "devfestSite-FE:build:production"
+              "buildTarget": "meerkat-fe:build:production"
             },
             "development": {
-              "buildTarget": "devfestSite-FE:build:development"
+              "buildTarget": "meerkat-fe:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -75,6 +75,7 @@
         "test": {
           "builder": "@angular/build:karma",
           "options": {
+            "karmaConfig": "karma.conf.js",
             "polyfills": [
               "zone.js",
               "zone.js/testing"
