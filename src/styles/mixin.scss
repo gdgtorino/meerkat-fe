@@ -1,10 +1,14 @@
-@mixin button($background, $color, $border:'transparent') {
+@mixin button($background, $color, $border:transparent) {
   background-color: $background;
   color: $color;
-  border-color: $border;
-  font-size: 16px;
+  border: 1px solid $border;
+  border-radius: 0.5rem;
+  font-size: 1rem;
   font-weight: 600;
-  letter-spacing: 2px;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  box-shadow: none;
+  padding: 0.5rem 2rem;
   &:hover {
     background-color: darken($background, 5%);
     color: $color;

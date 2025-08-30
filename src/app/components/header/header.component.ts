@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SharedModule} from '../../_shared/shared.module';
 import {faBars} from '@fortawesome/free-solid-svg-icons';
 import {FaIconLibrary} from '@fortawesome/angular-fontawesome';
@@ -10,8 +10,12 @@ import {FaIconLibrary} from '@fortawesome/angular-fontawesome';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
+  menu: boolean = false;
   constructor(library:FaIconLibrary) {
     library.addIcons(faBars);
+  }
+  ngOnInit() {
+    this.menu = false;
   }
 }
