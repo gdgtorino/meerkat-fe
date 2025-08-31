@@ -10,7 +10,7 @@
   box-shadow: none;
   padding: 0.5rem 2rem;
   &:hover {
-    background-color: darken($background, 5%);
+    background-color: scale($background, 5%);
     color: $color;
   }
 }
