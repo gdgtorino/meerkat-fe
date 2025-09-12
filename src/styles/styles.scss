@@ -1,6 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 @use "./vars" as variable;
+@use "./mixin.scss" as mixin;
 
 body {
   font-family: variable.$font-family-df;
 }
+
+.button-yellow {
+  @include mixin.button(variable.$yellow, variable.$dark);
+}
+
