@@ -1,1 +1,58 @@
-<p>footer works!</p>
+<footer class="footer" id="footer">
+  <div class="container-fluid">
+    <!-- Header section with logo and social icons -->
+    <div class="d-flex justify-content-between align-items-center mb-3 flex-column flex-md-row text-center text-md-start">
+      <div>
+        <img src="/images/logo-header.png" alt="Devfest Alps Logo" class="footer-logo">
+      </div>
+      <div class="d-flex col-2 gap-4 mt-3 mt-md-0">
+        <a href="#" aria-label="LinkedIn" class="text-decoration-none footer-icon">
+          <fa-icon [icon]="['fab', 'linkedin-in']" class="fs-3" ></fa-icon>
+        </a>
+        <a href="#" aria-label="GitHub" class="text-decoration-none footer-icon">
+          <fa-icon [icon]="['fab', 'github']" class="fs-3" ></fa-icon>
+        </a>
+        <a href="#" aria-label="Link" class="text-decoration-none footer-icon">
+          <fa-icon [icon]="['fas', 'link']" class="fs-3" ></fa-icon>
+        </a>
+      </div>
+    </div>
+    
+    <!-- Divider line -->
+    <hr class="footer-divider my-4">
+    
+    <!-- Content section -->
+    <div class="my-4">
+      <div class="d-flex justify-content-between align-items-start flex-column flex-md-row">
+        <div class="d-flex flex-column flex-md-row gap-5 mb-4 mb-md-0">
+          <div>
+            <h5 class="font-header-2 mb-3">About us</h5>
+            <ul class="list-unstyled font-body-normal m-0">
+              <li class="mb-2"><a href="#" class="text-decoration-none footer-link">Devfest 2022</a></li>
+              <li class="mb-2"><a href="#" class="text-decoration-none footer-link">Devfest 2023</a></li>
+              <li class="mb-2"><a href="#" class="text-decoration-none footer-link">GDG Torino</a></li>
+              <li class="mb-2"><a href="#" class="text-decoration-none footer-link">GDG Valle d'Aosta</a></li>
+            </ul>
+          </div>
+          
+          <div>
+            <h5 class="font-header-2 mb-3">Event resources</h5>
+            <ul class="list-unstyled font-body-normal m-0">
+              <li class="mb-2"><a href="#" class="text-decoration-none footer-link">Proposal IT</a></li>
+              <li class="mb-2"><a href="#" class="text-decoration-none footer-link">Proposal EN</a></li>
+              <li class="mb-2"><a href="#" class="text-decoration-none footer-link">Call For Papers</a></li>
+              <li class="mb-2"><a href="#" class="text-decoration-none footer-link">Call For Helpers</a></li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="col-md-2 gap-3 d-flex flex-column mt-3 mt-md-0">
+          <h5 class="font-body-bold">Organized by</h5>
+          <!-- FIXME: immagine corretta -->
+          <img src="/images/organizers.png" alt="GDG Torino and GDG Valle D'Aosta" class="mb-3 organizers">
+          <a href="mailto:info@gdgtorino.it" class="text-decoration-none font-body-bold footer-email">info@gdgtorino.it</a>
+        </div>
+      </div>
+    </div>
+    </div>
+</footer>
