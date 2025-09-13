@@ -16,6 +16,9 @@
 }
 // Large devices (desktops, 992px and up)
 @media (min-width: 992px) {
+  #footer .gap-md-footer-section {
+    gap: 10rem;
+  }
 }
 
 // Extra large devices (large desktops, 1200px and up)
