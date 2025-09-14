@@ -18,7 +18,7 @@ export class BaseApiService {
     protected http: HttpClient,
     protected transferState: TransferState,
     @Inject(PLATFORM_ID) private platformId: Object,
-    @Inject(API_URL_TOKEN) private apiUrl: string
+    @Inject(API_URL_TOKEN) protected apiUrl: string
   ) {}
 
   // makeStateKey<T>('key'): unique key for the data we need to save
