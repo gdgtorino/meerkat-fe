@@ -3,3 +3,15 @@
 .header {
   padding: 1.3rem;
 }
+.navbar-brand {
+  max-width: 14rem;
+  img {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .navbar-brand {
+    max-width: 10rem;
+  }
+}
