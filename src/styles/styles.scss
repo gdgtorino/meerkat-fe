@@ -12,6 +12,11 @@ body {
   font-weight: 800;
 }
 
+.head-2 {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
 .head-3 {
   font-family: variable.$font-family-secondary;
   font-optical-sizing: auto;
@@ -22,4 +27,8 @@ body {
 
 .button-yellow {
   @include mixin.button(variable.$yellow, variable.$dark);
+}
+
+.text-primary {
+  color: variable.$primary;
 }

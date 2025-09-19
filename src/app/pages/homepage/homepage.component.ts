@@ -1,12 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {Headline} from '../../components/headline/headline';
 import {HomeStructureModel} from '../../_shared/models/home.model';
+import {CardUser} from '../../components/card-user/card-user';
 
 @Component({
   selector: 'app-homepage',
   standalone: true,
   imports: [
-    Headline
+    Headline,
+    CardUser
   ],
   templateUrl: './homepage.component.html',
   styleUrl: './homepage.component.scss'
