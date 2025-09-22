@@ -1,9 +1,35 @@
 <div class="container-xxl">
   <app-headline [headlineData]="homeData.header"></app-headline>
-  <div class="row">
-    <div class="col-lg-3 col-12">
-      <app-card-user></app-card-user>
-
+  <div id="speakers" class="mt-lg-5 mt-3">
+    <div class="d-flex justify-content-between mb-4">
+      <h2 class="head-1">Speakers</h2>
+      <button type="button" aria-label="view more speakers" class="btn btn-link text-primary align-items-center d-flex hyperlink-text">
+        View more
+        <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
+      </button>
     </div>
+    <div class="row">
+      <div class="col-lg-3 col-12">
+        <app-card-user></app-card-user>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div id="organizers" class="mt-lg-5 mt-3">
+    <div class="d-flex justify-content-between mb-4">
+      <h2 class="head-1">Organizers</h2>
+      <button type="button" aria-label="view more speakers" class="btn btn-link text-primary align-items-center d-flex hyperlink-text">
+        View more
+        <fa-icon [icon]="['fas', 'chevron-right']"></fa-icon>
+      </button>
+    </div>
+    <div class="row">
+      <div class="col-lg-3 col-12">
+        <app-card-user></app-card-user>
+      </div>
+    </div>
+
   </div>
 </div>
