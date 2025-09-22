@@ -1,8 +1,16 @@
 <div class="card-container text-center position-relative my-3">
   <div class="img-container position-relative ratio-1x1 mx-auto">
-    <img [ngSrc]="img" class="object-fit-cover rounded-3" fill alt="speaker 1" priority/>
+    <img [ngSrc]="img" class="object-fit-cover rounded-4" fill alt="speaker 1" priority/>
   </div>
-  <h2 class="head-2 text-primary my-2">Build with AI : Gemma & NotebookLM</h2>
-  <p class="head-2 my-0">Name Surname</p>
-  <p class="my-0">Job desription</p>
+  <h2 class="head-2 text-primary mt-3">Build with AI : Gemma & NotebookLM</h2>
+  <p class="head-2 mb-0 mt-3">Name Surname</p>
+  <p class=" my-0">Job desription</p>
+  <div class="d-flex justify-content-center mt-3">
+    <button type="button" aria-label="linkedin link" class="btn btn-link text-df-grey">
+      <fa-icon [icon]="['fab', 'linkedin']" class="text-df-grey fa-2xl"></fa-icon>
+    </button>
+    <button type="button" aria-label="github link" class="btn btn-link text-df-grey">
+      <fa-icon [icon]="['fab', 'github']" class="text-df-grey fa-2xl"></fa-icon>
+    </button>
+  </div>
 </div>
