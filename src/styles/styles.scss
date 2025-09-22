@@ -25,6 +25,11 @@ body {
   font-size: 1rem;
 }
 
+.hyperlink-text {
+  font-family: variable.$font-family-secondary;
+  font-size: 1rem;
+}
+
 .button-yellow {
   @include mixin.button(variable.$yellow, variable.$dark);
 }
