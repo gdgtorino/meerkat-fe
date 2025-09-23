@@ -12,6 +12,11 @@ body {
   font-weight: 800;
 }
 
+.head-2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
 .head-3 {
   font-family: variable.$font-family-secondary;
   font-optical-sizing: auto;
@@ -20,6 +25,27 @@ body {
   font-size: 1rem;
 }
 
+.hyperlink-text {
+  font-family: variable.$font-family-secondary;
+  font-size: 1rem;
+}
+
 .button-yellow {
   @include mixin.button(variable.$yellow, variable.$dark);
+}
+.button-red {
+  @include mixin.button(variable.$red, variable.$light-gray);
+}
+
+.text-primary {
+  color: variable.$primary;
+}
+.text-df-grey {
+  color: variable.$dark-gray;
+}
+
+.cf-card {
+  border: 1px solid variable.$red;
+  background-color: variable.$light-gray;
+  padding: 1.25rem 1rem;
 }
