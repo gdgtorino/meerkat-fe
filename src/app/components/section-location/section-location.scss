@@ -1,0 +1,6 @@
+@use "../../../styles/vars" as variable;
+.img-location-container {
+  width: 100%;
+  aspect-ratio: 1;
+  border: 1px solid variable.$yellow;
+}
