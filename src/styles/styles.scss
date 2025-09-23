@@ -33,10 +33,19 @@ body {
 .button-yellow {
   @include mixin.button(variable.$yellow, variable.$dark);
 }
+.button-red {
+  @include mixin.button(variable.$red, variable.$light-gray);
+}
 
 .text-primary {
   color: variable.$primary;
 }
 .text-df-grey {
   color: variable.$dark-gray;
+}
+
+.cf-card {
+  border: 1px solid variable.$red;
+  background-color: variable.$light-gray;
+  padding: 1.25rem 1rem;
 }
