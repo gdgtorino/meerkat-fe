@@ -4,6 +4,7 @@ import {HomeStructureModel} from '../../_shared/models/home.model';
 import {CardUser} from '../../components/card-user/card-user';
 import {FaIconComponent, FaIconLibrary} from '@fortawesome/angular-fontawesome';
 import {faChevronRight} from '@fortawesome/free-solid-svg-icons';
+import {SectionSponsors} from '../../components/section-sponsors/section-sponsors';
 
 @Component({
   selector: 'app-homepage',
@@ -11,7 +12,8 @@ import {faChevronRight} from '@fortawesome/free-solid-svg-icons';
   imports: [
     Headline,
     CardUser,
-    FaIconComponent
+    FaIconComponent,
+    SectionSponsors
   ],
   templateUrl: './homepage.component.html',
   styleUrl: './homepage.component.scss'
