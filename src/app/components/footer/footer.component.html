@@ -1,1 +1,70 @@
-<p>footer works!</p>
+<footer class="footer mt-4" id="footer">
+  <div class="container-fluid">
+    <div class="d-flex justify-content-between mb-3 flex-column flex-md-row text-md-start">
+      <div>
+        <img src="/images/logo-header.png" alt="Devfest Alps Logo" class="footer-logo">
+      </div>
+      <div class="d-flex col-2 gap-4 mt-3 mt-md-0">
+        <a href="#" aria-label="LinkedIn" class="text-decoration-none footer-icon">
+          <fa-icon [icon]="['fab', 'linkedin-in']" class="fs-3" ></fa-icon>
+        </a>
+        <a href="#" aria-label="GitHub" class="text-decoration-none footer-icon">
+          <fa-icon [icon]="['fab', 'github']" class="fs-3" ></fa-icon>
+        </a>
+        <a href="#" aria-label="Link" class="text-decoration-none footer-icon">
+          <fa-icon [icon]="['fas', 'link']" class="fs-3" ></fa-icon>
+        </a>
+      </div>
+    </div>
+    
+    <hr class="footer-divider my-4">
+    
+    <div class="my-4">
+      <div class="d-flex justify-content-between align-items-start flex-column flex-md-row">
+        
+        <div class="d-flex flex-column flex-md-row gap-md-footer-section mb-4 mb-md-0">
+       <!-- FIXME: find organizers in array and remove slice and [3] -->
+          @for(section of footerData.slice(0, 2); track section.id) {
+            <div>
+              <h5 class="font-header-2 mb-3">{{ section.title }}</h5>
+              @if(section.subsection && section.subsection.length > 0) {
+                <ul class="list-unstyled font-body-normal m-0">
+                  @for(sub of section.subsection; track sub.id) {
+                    <li class="mb-2">
+                      <a href="#" class="text-decoration-none footer-link" 
+                         [attr.title]="sub.content">
+                        {{ sub.title }}
+                      </a>
+                    </li>
+                  }
+                </ul>
+              } @else {
+                <p class="font-body-normal mb-0">{{ section.brief }}</p>
+              }
+            </div>
+          }
+        </div>
+        
+        @if(footerData[2]) {
+          <div class="col-md-2 gap-3 d-flex flex-column mt-3 mt-md-0">
+            <h5 class="font-body-bold">{{ footerData[2].title }}</h5>
+            
+            @if(footerData[2].image) {
+              <img [src]="footerData[2].image.src" 
+                   [alt]="footerData[2].image.title" 
+                   class="mb-3 organizers">
+            }
+            
+            @if(footerData[2].subsection && footerData[2].subsection[0]) {
+              <a [href]="'mailto:' + footerData[2].subsection[0].content" 
+                 class="text-decoration-none font-body-bold footer-email">
+                {{ footerData[2].subsection[0].content }}
+              </a>
+            }
+          </div>
+        }
+        
+      </div>
+    </div>
+  </div>
+</footer>

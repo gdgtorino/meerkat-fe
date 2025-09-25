@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @use "./vars" as variable;
 @use "./mixin.scss" as mixin;
+@import "./responsive.scss";
 
 body {
   font-family: variable.$font-family-df;
@@ -49,3 +50,41 @@ body {
   background-color: variable.$light-gray;
   padding: 1.25rem 1rem;
 }
+
+.font-header-1 {
+  font-family: variable.$font-family-df;
+  font-weight: 700;
+  font-size: 32px;
+}
+
+.font-header-2 {
+  font-family: variable.$font-family-df;
+  font-weight: 600; 
+  font-size: 18px;
+}
+
+.font-header-3 {
+  font-family: variable.$font-family-secondary;
+  font-weight: 400;
+  font-size: 18px;
+}
+
+.font-body-normal {
+  font-family: variable.$font-family-df;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.font-body-bold {
+  font-family: variable.$font-family-df;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 120%;
+}
+
+.font-body-int {
+  font-family: variable.$font-family-df;
+  font-weight: bold;
+  font-size: 48px;
+}
+

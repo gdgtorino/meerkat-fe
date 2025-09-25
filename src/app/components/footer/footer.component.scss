@@ -1,0 +1,43 @@
+@use "../../../styles/vars" as variables;
+
+.footer {
+  background-color: variables.$yellow-light;
+  color: variables.$dark;
+  padding: 2em 6em;
+  margin-top: auto;
+
+  .footer-logo {
+    height: 42px;
+    width: auto;
+  }
+
+  .footer-divider {
+    border: none;
+    border-top: 3px solid variables.$yellow;
+  }
+
+  .footer-icon,
+  .footer-link,
+  .footer-email {
+    color: variables.$dark;
+    transition: color 0.3s ease;
+    &.footer-icon {
+      color: variables.$dark-gray;
+    }
+    &:hover {
+      color: variables.$yellow;
+    }
+  }
+
+  .footer-link:hover {
+    text-decoration: underline;
+  }
+
+  .organizers {
+    width: auto;
+  }
+
+  .gap-md-footer-section {
+    gap: 3rem;
+  }
+}
