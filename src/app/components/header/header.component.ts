@@ -31,12 +31,6 @@ export class HeaderComponent implements OnInit {
         open_new_tab: false,
         color_in_background: true
       },
-      {
-        label: 'Call for Papers',
-        href: '#cfp',
-        open_new_tab: false,
-        color_in_background: false
-      }
     ]
   };
 

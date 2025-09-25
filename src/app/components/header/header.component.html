@@ -35,11 +35,10 @@
     
     <div class="d-none d-md-flex gap-2">
       @for(cta of headerData.call_to_action; track cta.label) {
-        <a [href]="cta.href" 
-           [target]="cta.open_new_tab ? '_blank' : '_self'"
-           [class]="cta.color_in_background ? 'button-yellow' : 'btn btn-outline-warning'">
+        <button 
+           [class]="cta.color_in_background ? 'button-yellow' : 'button-transparent'">
           {{ cta.label }}
-        </a>
+      </button>
       }
     </div>
   </div>
