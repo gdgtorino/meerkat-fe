@@ -33,6 +33,10 @@ export class ApiService extends BaseApiService  {
     return this.getWithState<any>(`talk/${id}`, id);
   }
 
+  getTalk() {
+    return this.getWithState<any>(`talk`);
+  }
+
   updateHeader(body: Header) {
     return this.http.put(`${this.apiUrl}/homepage/header`, body).pipe(map((res: any) => res));
   }

@@ -1,0 +1,56 @@
+@use "../../../styles/vars" as variables;
+
+.about-section {
+  .text-dark-gray {
+    color: variables.$dark-gray;
+  }
+
+  .about-text-box {
+    flex: 0 0 auto;
+  }
+
+  .about-card-wrapper {
+    min-height: 200px;
+  }
+
+  .about-card {
+    background-size: cover;
+    background-position: center;
+  }
+
+  .about-card-overlay {
+    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+  }
+
+  .about-card-number {
+    font-family: variables.$font-family-secondary;
+    font-size: 48px;
+    line-height: 1;
+  }
+
+  .font-header-2 {
+    font-weight: 500;
+  }
+
+  .about-card-large {
+    min-height: 400px;
+  }
+
+  // .about-card-wrapper-mobile {
+  //   min-height: 100px;
+  // }
+
+  .about-card-mobile-large {
+    min-height: 210px;
+  }
+
+  .about-card-mobile-full {
+    height: 140px;
+  }
+
+  .about-card-number-mobile {
+    font-family: variables.$font-family-secondary;
+    font-size: 32px;
+    line-height: 1;
+  }
+}

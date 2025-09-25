@@ -34,6 +34,10 @@ body {
 .button-yellow {
   @include mixin.button(variable.$yellow, variable.$dark);
 }
+
+.button-transparent {
+  @include mixin.button(transparent, variable.$dark);
+}
 .button-red {
   @include mixin.button(variable.$red, variable.$light-gray);
 }
@@ -87,4 +91,3 @@ body {
   font-weight: bold;
   font-size: 48px;
 }
-

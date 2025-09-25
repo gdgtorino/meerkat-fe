@@ -25,11 +25,12 @@ export interface ItemModel {
     id: number;
     is_image: boolean;
     color: string;
-    image: ImageModel;
+    image?: ImageModel;
   }
   image?: ImageModel;
   type_box?: {
     id: number;
     name: string;
-  }
+  },
+  subsection: any, //TODO: verificare con chiamate
 }
