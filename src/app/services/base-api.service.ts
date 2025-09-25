@@ -17,7 +17,7 @@ export class BaseApiService {
   constructor(
     protected http: HttpClient,
     protected transferState: TransferState,
-    @Inject(PLATFORM_ID) private platformId: Object,
+    @Inject(PLATFORM_ID) readonly platformId: Object,
     @Inject(API_URL_TOKEN) protected apiUrl: string
   ) {}
 
