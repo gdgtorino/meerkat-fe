@@ -1,0 +1,40 @@
+@use "../../../styles/vars" as variable;
+
+.headline-container {
+  min-height: 50vh;
+}
+
+img {
+  filter: blur(0.5px);
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+}
+
+.card-headline {
+  background-color: variable.$light-gray;
+  border: 1px solid variable.$yellow;
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+}
+.card-cover {
+  position: absolute;
+}
+
+@media  screen and (max-width:480px) {
+    .card-cover {
+      position: relative!important;
+    }
+    .headline-container {
+      min-height: 30vh;
+    }
+  button {
+    width: 100%;
+  }
+}
